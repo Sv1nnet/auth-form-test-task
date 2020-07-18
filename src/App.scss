@@ -1,0 +1,13 @@
+.App {
+  &__form {
+    box-sizing: border-box;
+    max-width: 320px;
+    margin: 15px auto;
+    padding: 15px;
+    box-shadow: 0 0 5px grey;
+  }
+  &__signout-btn {
+    display: block;
+    margin: 15px auto;
+  }
+}

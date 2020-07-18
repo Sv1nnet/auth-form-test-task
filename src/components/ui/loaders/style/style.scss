@@ -1,0 +1,30 @@
+.Loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #ffffff88;
+  display: flex;
+
+  &__icon  {
+    margin: auto;
+    height: 40px;
+    width: 40px;
+    box-sizing: border-box;
+    background: transparent;
+    border-radius: 50%;
+  
+    border: 2px solid navy;
+    border-left-color: red;
+    border-right-color: orange;
+    border-bottom-color: green;
+    animation: spinner 500ms linear infinite;
+  }
+}
+
+@keyframes spinner {
+	to {
+		transform: rotate(360deg);
+	}
+}

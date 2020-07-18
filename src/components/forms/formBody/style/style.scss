@@ -1,0 +1,23 @@
+.FormBody {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &__label {
+    flex-basis: 100%;
+    margin-bottom: 12px;
+  }
+  &__text {
+    font-size: 0.9em;
+  }
+  &__input {
+    display: block;
+    box-sizing: border-box;
+    padding: 4px;
+    width: 100%;
+  }
+
+  &__btn {
+    display: block;
+  }
+}
