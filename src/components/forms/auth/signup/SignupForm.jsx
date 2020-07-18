@@ -7,6 +7,7 @@ import auth from '../../../../actions/authActions';
 import useStatus from '../../../../utils/hooks/useStatus';
 
 import Loader from '../../../ui/loaders/Loader';
+import FormInput from '../../formInput/FormInput';
 
 const SignupForm = ({ signup }) => {
   const {
@@ -42,37 +43,42 @@ const SignupForm = ({ signup }) => {
       <FormContainer className="App__form" onSubmit={onSubmit} shouldReset>
         {({ formFields, formActions }) => {
           const { onChange } = formActions;
+          const classNames = {
+            labelClassName: 'FormBody__label',
+            inputClassName: 'FormBody__input',
+            textClassName: 'FormBody__text',
+          };
           return (
             <>
-              <FormBody
-                fields={[
-                  {
-                    type: 'email',
-                    id: 'email',
-                    onChange,
-                    value: formFields.email,
-                    placeholder: "Email",
-                    required: true,
-                  },
-                  {
-                    type: 'password',
-                    id: 'password',
-                    onChange,
-                    value: formFields.password,
-                    placeholder: "Password",
-                    required: true,
-                  },
-                  {
-                    type: 'password',
-                    id: 'confirmPassword',
-                    onChange,
-                    value: formFields.confirmPassword,
-                    placeholder: "Confirm password",
-                    required: true,
-                  },
-                ]}
-                buttonText="Sign Up"
-              />
+              <FormBody buttonText="Sign Up">
+                <FormInput
+                  type="email"
+                  id="email"
+                  onChange={onChange}
+                  value={formFields.email}
+                  placeholder="Email"
+                  required
+                  classNames={classNames}
+                />
+                <FormInput
+                  type="password"
+                  id="password"
+                  onChange={onChange}
+                  value={formFields.password}
+                  placeholder="Password"
+                  required
+                  classNames={classNames}
+                />
+                <FormInput
+                  type="password"
+                  id="confirmPassword"
+                  onChange={onChange}
+                  value={formFields.confirmPassword}
+                  placeholder="Confirm password"
+                  required
+                  classNames={classNames}
+                />
+              </FormBody>
               {status.err.statusCode && <p style={{ textAlign: 'center', color: 'red' }}>{status.err.message}</p>}
             </>
           );

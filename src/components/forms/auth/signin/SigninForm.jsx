@@ -6,6 +6,7 @@ import FormBody from '../../formBody/FormBody';
 import auth from '../../../../actions/authActions';
 import useStatus from '../../../../utils/hooks/useStatus';
 import Loader from '../../../ui/loaders/Loader';
+import FormInput from '../../formInput/FormInput';
 
 const SignupForm = ({ signin }) => {
   const {
@@ -30,30 +31,33 @@ const SignupForm = ({ signin }) => {
       <FormContainer className="App__form" onSubmit={onSubmit}>
         {({ formFields, formActions }) => {
           const { onChange } = formActions;
+          const classNames = {
+            labelClassName: 'FormBody__label',
+            inputClassName: 'FormBody__input',
+            textClassName: 'FormBody__text',
+          };
           return (
             <>
-              <FormBody
-                fields={[
-                  {
-                    type: 'email',
-                    id: 'email',
-                    onChange,
-                    value: formFields.email,
-                    placeholder: "Email",
-                    required: true,
-                  },
-                  {
-                    type: 'password',
-                    id: 'password',
-                    onChange,
-                    value: formFields.password,
-                    placeholder: "Password",
-                    required: true,
-                  }
-                ]}
-
-                buttonText="Sign In"
-              />
+              <FormBody buttonText="Sign In">
+                <FormInput
+                  type="email"
+                  id="email"
+                  onChange={onChange}
+                  value={formFields.email}
+                  placeholder="Email"
+                  required
+                  classNames={classNames}
+                />
+                <FormInput
+                  type="password"
+                  id="password"
+                  onChange={onChange}
+                  value={formFields.password}
+                  placeholder="Password"
+                  required
+                  classNames={classNames}
+                />
+              </FormBody>
               {status.err.statusCode && <p style={{ textAlign: 'center', color: 'red' }}>{status.err.message}</p>}
             </>
           );

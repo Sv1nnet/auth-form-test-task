@@ -5,7 +5,7 @@ import resolveClassName from '../../../utils/resolveClassName';
 
 import './style/style.scss';
 
-const FormBody = ({ className, buttonText, fields }) => {
+const FormBody = ({ className, buttonText, children }) => {
   const [bodyClassName, setBodyClassName] = useState(resolveClassName('FormBody', className));
 
   useEffect(() => {
@@ -14,17 +14,7 @@ const FormBody = ({ className, buttonText, fields }) => {
 
   return (
     <div className={bodyClassName}>
-      {fields.map((field) => (
-        <FormInput
-          key={field.id}
-          {...field}
-          classNames={{
-            labelClassName: 'FormBody__label',
-            inputClassName: 'FormBody__input',
-            textClassName: 'FormBody__text',
-          }}
-        />
-      ))}
+      {children}
       <button type="submit" className="FormBody__btn">{buttonText}</button>
     </div>
   );
@@ -34,21 +24,7 @@ const FormBody = ({ className, buttonText, fields }) => {
 FormBody.propTypes = {
   className: PropTypes.string,
   buttonText: PropTypes.string.isRequired,
-  fields: PropTypes.arrayOf(PropTypes.shape({ // inputs that we need in a form body
-    type: PropTypes.string,
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string,
-    classNames: PropTypes.shape({
-      labelClassName: PropTypes.string,
-      inputClassName: PropTypes.string,
-      textClassName: PropTypes.string,
-    }),
-    required: PropTypes.bool,
-    value: PropTypes.string,
-    placeholder: PropTypes.string,
-    defaultValue: PropTypes.string,
-    onChange: PropTypes.func,
-  })),
+  children: PropTypes.element.isRequired,
 };
 
 FormBody.defaultProps = {
