@@ -29,7 +29,6 @@ FormBody.propTypes = {
 
 FormBody.defaultProps = {
   className: '',
-  fields: [],
 }
 
 
