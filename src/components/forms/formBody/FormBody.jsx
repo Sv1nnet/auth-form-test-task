@@ -23,7 +23,10 @@ const FormBody = ({ className, buttonText, children }) => {
 FormBody.propTypes = {
   className: PropTypes.string,
   buttonText: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
 };
 
 FormBody.defaultProps = {

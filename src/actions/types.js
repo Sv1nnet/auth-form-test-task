@@ -9,5 +9,5 @@ export const authTypes = {
 
 export const userTypes = {
   GET_LIST: 'GET_LIST',
-  ERROR: 'ERROR',
+  GET_CONTENT_ERROR: 'GET_CONTENT_ERROR',
 }

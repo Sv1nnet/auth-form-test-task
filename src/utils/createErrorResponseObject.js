@@ -12,7 +12,6 @@
  * }}
  */
 const createErrorResponseObject = (err) => {
-  console.log(err)
   const isNetworkError = err.message === 'Network Error';
   const responseData = {
     message: isNetworkError ? 'Service Unavailable' : err.response.data.message,

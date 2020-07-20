@@ -3,7 +3,7 @@ const initialState = {
   users: [],
 };
 
-const authReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
   const { data, type } = action;
   switch (type) {
     case userTypes.GET_LIST:
@@ -11,11 +11,11 @@ const authReducer = (state = initialState, action) => {
         ...state,
         users: data,
       };
-    case userTypes.ERROR:
+    case userTypes.GET_CONTENT_ERROR:
     default:
       return state;
   }
 
 }
 
-export default authReducer;
+export default userReducer;

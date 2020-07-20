@@ -1,50 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import './App.scss';
 import AuthRoute from './components/routes/AuthRoute';
 import UserRoute from './components/routes/UserRoute';
-import Loader from './components/ui/loaders/Loader';
 import auth from './actions/authActions';
-import useStatus from './utils/hooks/useStatus';
 
-const App = ({ token, refresh }) => {
-  const [tokenVerified, setTokenVerified] = useState(false);
-  const {
-    status,
-    setStatusLoading,
-    handleSuccess,
-    handleError,
-  } = useStatus();
+import './App.scss';
 
-  // Refresh token if token exists and App was just mounted (e.g. a page was refreshed)
-  useEffect(() => {
-    if (token) {
-      setStatusLoading();
-      refresh()
-        .then(handleSuccess)
-        .then((res) => { setTokenVerified(true); return res; })
-        .catch(handleError)
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (token) setTokenVerified(true);
-    else setTokenVerified(false);
-  }, [token])
-
+const App = ({ refreshToken, refresh }) => {
   return (
     <div className="App">
-      {status.loading && <Loader />}
-      {!token && <AuthRoute />}
-      {tokenVerified && <UserRoute />}
+      {refreshToken ? <UserRoute /> :  <AuthRoute />}
     </div>
   );
 }
 
 const mapStateToProps = (state) => ({
-  token: state.auth.refresh,
+  refreshToken: state.auth.refresh,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -52,12 +24,12 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 App.propTypes = {
-  token: PropTypes.string,
+  refreshToken: PropTypes.string,
   refresh: PropTypes.func.isRequired,
 }
 
 App.defaultProps = {
-  token: null,
+  refreshToken: null,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
