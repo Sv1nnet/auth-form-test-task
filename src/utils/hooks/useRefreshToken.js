@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { store } from '../../index';
+import { useStore } from 'react-redux';
 import auth from '../../actions/authActions';
 
 /**
@@ -10,8 +10,9 @@ import auth from '../../actions/authActions';
  * @param {Function} getContent function which is used for gettig fontent by using accesss token
  * @returns {Function} function memoized by React.useCallback
  */
-const useRefreshToken = (getContent) => useCallback(() => {
-  return getContent().catch(async (err) => {
+const useRefreshToken = (getContent) => {
+  const store = useStore();
+  return useCallback(() => getContent().catch(async (err) => {
     if (err.message === 'jwt expired' || err.statusCode === 401) {
       try {
         await auth.refresh()(store.dispatch, store.getState);
@@ -22,7 +23,7 @@ const useRefreshToken = (getContent) => useCallback(() => {
     } else {
       throw err;
     }
-  });
-}, [getContent]);
+  }), [getContent, store]);
+};
 
 export default useRefreshToken;

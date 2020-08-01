@@ -54,11 +54,11 @@ FormInput.defaultProps = {
 // If classNames the same and value is not changed then we don't need the input to be rerendered
 export default React.memo(FormInput, (prev, curr) => {
   const valuesEqual = prev.value === curr.value;
-  let classNamesEquals = false;
+  let classNamesEqual = false;
   
   for (const classNames in prev.classNames) {
-    classNamesEquals = curr.classNames[classNames] === prev.classNames[classNames];
+    classNamesEqual = curr.classNames[classNames] === prev.classNames[classNames];
   }
 
-  return valuesEqual && classNamesEquals;
+  return valuesEqual && classNamesEqual;
 });
